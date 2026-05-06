@@ -1,6 +1,9 @@
 
 
 
+**1.1.9** (2026-05-06)
+- fix: format output for preserve order when indent by is set to empty string
+
 **1.1.8** (2026-05-05)
 - fix: skip text property for PI tags
 - improve typings

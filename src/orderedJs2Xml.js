@@ -11,7 +11,7 @@ const EOL = "\n";
  */
 export default function toXml(jArray, options) {
     let indentation = "";
-    if (options.format && options.indentBy.length > 0) {
+    if (options.format) {
         indentation = EOL;
     }
 

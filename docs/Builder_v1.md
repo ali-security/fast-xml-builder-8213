@@ -232,23 +232,6 @@ const options = {
 </tag>
 ```
 
-### Ignore via callback function
-
-The callback receives the attribute name and the current `jPath` (a dot-notation string by default, or a `Matcher` instance if `jPath: false`).
-
-```js
-const options = {
-    attributeNamePrefix: "$",
-    ignoreAttributes: (attrName, jPath) => attrName.startsWith('ns:') || jPath === 'tag.tag2'
-};
-```
-
-```xml
-<tag ns2:attr3="a3-value" ns2:attr4="a4-value">
-    <tag2></tag2>
-</tag>
-```
-
 ---
 
 ## indentBy
@@ -305,6 +288,21 @@ When you parse XML using [Fast XML Parser](https://github.com/NaturalIntelligenc
 Set to `true` (default) to replace special characters with XML entities (`&amp;`, `&lt;`, `&gt;`, `&apos;`, `&quot;`). Disable with `processEntities: false` for better performance when you know your content contains no entities.
 
 > **Security note:** Single and double quotes in attribute values are always escaped to `&apos;` and `&quot;`, regardless of this setting.
+
+---
+
+## sanitizeName
+Callback function that transforms tag or attribute names. Receives the raw name and returns the sanitized version.
+
+```js
+const builder = new XMLBuilder({
+    sanitizeName: (name) => "_" + name
+});
+```
+
+By default it is set to `false`. This means, builder will not santize the tag and attribute names. 
+
+Please note that we use [xml-entities](https://github.com/NaturalIntelligence/xml-entities) to validate tag and attribute names. This also consider xml version given in XML declaration. However, if not present then default version considered is 1.0.
 
 ---
 
